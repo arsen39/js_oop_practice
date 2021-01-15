@@ -1,5 +1,3 @@
-const today = new Date();
-
 class User {
   constructor(name, surname) {
     this.name = name;
@@ -46,13 +44,13 @@ class Student extends User {
 
     if (
       newYearOfEntering <
-        today.getFullYear() - MAX_NUMBER_OF_YEARS_OF_EDUCATION ||
-      newYearOfEntering > today.getFullYear()
+        new Date ().getFullYear () - MAX_NUMBER_OF_YEARS_OF_EDUCATION ||
+      newYearOfEntering > new Date ().getFullYear()
     ) {
       throw new RangeError("Invalid Year");
     }
 
-    this._dateOfEntering = new Date (newYearOfEntering, 9, 1);
+    this._dateOfEntering = new Date(newYearOfEntering, 9, 1);
   }
 
   get yearOfEntering() {
@@ -60,6 +58,6 @@ class Student extends User {
   }
 
   getCourse() {
-    return today.getFullYear() - this._dateOfEntering.getFullYear();
+    return new Date ().getFullYear () - this._dateOfEntering.getFullYear();
   }
 }
