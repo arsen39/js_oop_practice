@@ -32,25 +32,24 @@ class User {
 }
 
 class Student extends User {
-  constructor(name, surname, yearOfEntering) {
+  constructor(name, surname, dateOfEntering) {
     super(name, surname);
-    this.dateOfEntering = yearOfEntering;
+    this.dateOfEntering = dateOfEntering;
   }
 
-  set dateOfEntering(newYearOfEntering) {
-    if (typeof newYearOfEntering !== "number") {
-      throw new TypeError("Invalid Year");
+  set dateOfEntering(newDateOfEntering) {
+    if (!(newDateOfEntering instanceof Date)) {
+      throw new TypeError("Invalid Data");
     }
 
     if (
-      newYearOfEntering <
-        new Date ().getFullYear () - MAX_NUMBER_OF_YEARS_OF_EDUCATION ||
-      newYearOfEntering >= new Date ().getFullYear()
+      newDateOfEntering > new Date() ||
+      newDateOfEntering < new Date().setFullYear(new Date().getFullYear() - 5)
     ) {
-      throw new RangeError("Invalid Year");
+      throw new RangeError("Invalid Data");
     }
 
-    this._dateOfEntering = new Date(newYearOfEntering, 9, 1);
+    this._dateOfEntering = newDateOfEntering;
   }
 
   get yearOfEntering() {
@@ -58,6 +57,6 @@ class Student extends User {
   }
 
   getCourse() {
-    return new Date ().getFullYear () - this._dateOfEntering.getFullYear();
+    return (new Date ().getFullYear() - this._dateOfEntering.getFullYear() + 1);
   }
 }
