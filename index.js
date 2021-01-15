@@ -45,7 +45,7 @@ class Student extends User {
     if (
       newYearOfEntering <
         new Date ().getFullYear () - MAX_NUMBER_OF_YEARS_OF_EDUCATION ||
-      newYearOfEntering > new Date ().getFullYear()
+      newYearOfEntering >= new Date ().getFullYear()
     ) {
       throw new RangeError("Invalid Year");
     }
